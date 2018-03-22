@@ -106,6 +106,9 @@ class plgVmPaymentMercadoPago extends vmPSPlugin {
 			'mercadopago_public_key' => array('', 'char'),
 			'mercadopago_binary_mode' => array('', 'char'),
 			'mercadopago_statement_descriptor' => array('', 'char'),
+			
+			//Restrictions - add siniestro
+			'countries' => array('', 'char'),		
 		);
 
 		$this->setConfigParameterable($this->_configTableFieldName, $varsToPush);
@@ -156,6 +159,9 @@ class plgVmPaymentMercadoPago extends vmPSPlugin {
 		JHTML::script("https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js");
 		vmJsApi::css('custom_checkout_mercadopago', 'plugins/vmpayment/mercadopago/mercadopago/assets/css');
 		vmJsApi::css('custom_checkout_ticket_mercadopago', 'plugins/vmpayment/mercadopago/mercadopago/assets/css');
+		
+		$mname = $this->_psType . '_name'; // add siniestro
+		$idN = 'virtuemart_'.$this->_psType.'method_id'; // add siniestro
 
 		foreach ($this->methods as $payment_method) {
 			//open checkout
@@ -176,6 +182,15 @@ class plgVmPaymentMercadoPago extends vmPSPlugin {
 				}
 
 				$methodSalesPrice = $this->setCartPrices($cart, $cartPrices, $payment_method);
+				
+				// add siniestro
+				if(!isset($htmlIn[$this->_psType][$payment_method->$idN])) {
+					//This makes trouble, because $method->$mname is used in  renderPluginName to render the Name, so it must not be called twice!
+					$payment_method->$mname = $this->renderPluginName ($payment_method);
+
+					//$htmlIn[$this->_psType][$method->$idN] = $this->getPluginHtml ($method, $selected, $methodSalesPrice);
+				}
+				// End siniestro
 
 				//add radio buton to select in checkout
 				$html = $this->getPluginHtml($payment_method, $selected, $methodSalesPrice);
@@ -359,7 +374,7 @@ class plgVmPaymentMercadoPago extends vmPSPlugin {
 					$sponsor_id = 217174514;
 					break;
 					case 'MLU':
-					$sponsor_id = 246379702;
+					$sponsor_id = 229299184; // add siniestro sponsor_id
 					break;
 					case 'MLV':
 					$sponsor_id = 210946191;
@@ -848,6 +863,12 @@ class plgVmPaymentMercadoPago extends vmPSPlugin {
 		if (!($payment_method = $this->getVmPluginMethod($_REQUEST['payment_method_id']))) {
 			return NULL;
 		}
+		
+		// add siniestro
+		if (!$this->selectedThisElement($payment_method->payment_element)) {
+			return NULL;
+		}
+		// end siniestro
 
 		$this->_debug = $payment_method->mercadopago_log == "true" ? TRUE : FALSE;
 
