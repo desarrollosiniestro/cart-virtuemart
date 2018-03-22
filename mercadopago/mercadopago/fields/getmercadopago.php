@@ -25,7 +25,7 @@ class JFormFieldGetMercadoPago extends JFormField {
 		$html = '<img src="' . $banner . '" />';
 		$html .= '<input type="hidden" name="mercadopago_sponsor_id" value="VALUE_SPONSOR_ID" />';
 		$html .= '<input type="hidden" name="mercadopago_site_id" value="VALUE_SITE_ID" />';
-		$html .= '<br/>Module Version: <strong>2.1.0</strong>';
+		$html .= '<br/>Module Version: <strong>2.1.0 (modified by siniestro)</strong>';
 
 		return $html;
 	}
