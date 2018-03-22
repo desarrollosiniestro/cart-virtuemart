@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<extension version="2.0" type="plugin" group="vmpayment">
+<extension version="2.0" type="plugin" group="vmpayment" method="upgrade">
 
     <name>Mercado Pago</name>
     <creationDate>March 15 2016</creationDate>
@@ -169,6 +169,12 @@
               label="VMPAYMENT_MERCADOPAGO_IPN_REJECTED" description="VMPAYMENT_MERCADOPAGO_IPN_REJECTED_DESC"/>
 
               <!-- End STATUS IPN -->
+                
+              <!-- Restrictions -->
+              <field type="vmtitle" default="VMPAYMENT_MERCADOPAGO_RESTRICTIONS_SECTION"
+                      description="VMPAYMENT_MERCADOPAGO_RESTRICTIONS_SECTION_DESC"/>
+              <field name="countries" type="vmcountries" scope="com_virtuemart" default="" multiple="true"
+                      label="VMPAYMENT_MERCADOPAGO_COUNTRIES" description="VMPAYMENT_MERCADOPAGO_COUNTRIES_DESC"/>
 
               <!-- Init OTHER CONFIG -->
               <field class="level1" type="vmtitle" default="VMPAYMENT_MERCADOPAGO_OTHERS_CONFIG"/>
@@ -183,11 +189,11 @@
                 <option value="true">VMPAYMENT_MERCADOPAGO_TEXT_YES</option>
                 <option value="false">VMPAYMENT_MERCADOPAGO_TEXT_NO</option>
               </field>
-
-
-              <field name="payment_logos" type="vmfiles" multiple="true" scope="com_virtuemart" label="VMPAYMENT_MERCADOPAGO_PAYMENT_LOGO"
-              description="VMPAYMENT_MERCADOPAGO_PAYMENT_LOGO_DESC" directory="/images/stories/virtuemart/payment"
-              default="default" hide_default="1" hide_none="1" stripext="0" exclude="^_"/>
+                              
+              <field name="payment_logos" type="vmfiles" multiple="true" directory="/images/virtuemart/payment"
+                       hide_none="1" label="VMPAYMENT_MERCADOPAGO_PAYMENT_LOGO"
+                       size="40"
+                       description="VMPAYMENT_MERCADOPAGO_PAYMENT_LOGO_DESC"/>
 
               <field type="vmtitle" default="" description="VMPAYMENT_MERCADOPAGO_LOGO_WARNING"/>
               <!-- Init OTHER CONFIG -->
