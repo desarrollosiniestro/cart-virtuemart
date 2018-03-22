@@ -14,7 +14,8 @@ defined('_JEXEC') or die('Restricted access');
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
  */
 
-?>
-
+/*
 <br/>
 <img src="<?php echo MercadoPagoHelper::getBanner($viewData['site_id']);?>" id="mercadopago-banner-basic">
+*/
+?>
